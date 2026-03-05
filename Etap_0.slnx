@@ -1,0 +1,7 @@
+<Solution>
+  <Project Path="BusinessLogic/BusinessLogic.csproj" Id="54ffc6ab-36d9-4c40-bc69-bc27a984e20e" />
+  <Project Path="Data/Data.csproj" Id="a137149d-b6e3-4476-b0bb-183a89bedd04" />
+  <Project Path="PresentationModel/PresentationModel.csproj" Id="1b0ad1fa-46d9-4698-86aa-bbc86e5807cb" />
+  <Project Path="PresentationView/PresentationView.csproj" Id="533378a7-c5e7-4d1e-8bc8-8778598e8308" />
+  <Project Path="PresentationViewModel/PresentationViewModel.csproj" Id="ced9f090-f7d9-4892-8aa4-968ae86830a4" />
+</Solution>
