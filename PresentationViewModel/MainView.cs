@@ -8,7 +8,7 @@
         {
             var repo = new Data.Repo();
             var service = new BusinessLogic.GreetService();
-            DisplayText = service.FormatGreeting(repo.GetNameFromDb());
+            DisplayText = service.FormatGreeting(repo.name);
         }
     }
 }
