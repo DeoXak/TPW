@@ -12,6 +12,9 @@ using Logic;
 
 namespace Presentation
 {
+    /// <summary>
+    /// Interaction logic for MainWindow.xaml
+    /// </summary>
     public partial class MainWindow : Window
     {
         private LogicAPI _logic = LogicAPI.CreateLayer();
@@ -30,7 +33,7 @@ namespace Presentation
         }
 
         private void Redraw()
-        { 
+        {
             BilliardTable.Children.Clear();
             foreach (var ball in _logic.GetBalls())
             {
