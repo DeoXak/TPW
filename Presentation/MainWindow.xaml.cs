@@ -9,6 +9,8 @@ using System.Windows.Media.Imaging;
 using System.Windows.Navigation;
 using System.Windows.Shapes;
 using Logic;
+using System.Windows.Threading;
+using System.Security.RightsManagement;
 
 namespace Presentation
 {
@@ -19,19 +21,56 @@ namespace Presentation
     {
         private LogicAPI _logic = LogicAPI.CreateLayer();
         private Random _random = new Random();
-
-        private void AddBall_Click(object sender, RoutedEventArgs e)
+        DispatcherTimer _timer;
+        public MainWindow()
         {
-            double radius = 10;
+            InitializeComponent();
+            _timer = new DispatcherTimer();
+            _timer.Interval = TimeSpan.FromMilliseconds(16);
+            _timer.Tick += Timer_Tick;
+        }
 
-            double x = _random.NextDouble() * (BilliardTable.ActualWidth - 2 * radius);
-            double y = _random.NextDouble() * (BilliardTable.ActualHeight - 2 * radius);
-
-            _logic.AddBall(x, y, radius);
-
+        private void Timer_Tick(object sender, EventArgs e)
+        {
+            _logic.UpdatePosition(BilliardTable.ActualHeight, BilliardTable.ActualWidth);
             Redraw();
         }
 
+        private void AddBall_Click(object sender, RoutedEventArgs e)
+        {
+            int ilosc = int.Parse(IloscKulek.Text);
+            for (int i = 0; i < ilosc; i++)
+            {
+                double radius = 10;
+
+                double x = _random.NextDouble() * (BilliardTable.ActualWidth - 2 * radius);
+                double y = _random.NextDouble() * (BilliardTable.ActualHeight - 2 * radius);
+                double velx = _random.NextDouble() * 10 - 5;
+                double vely = _random.NextDouble() * 10 - 5;
+
+                _logic.AddBall(x, y, radius, velx, vely);
+
+                Redraw();
+            }
+        }
+        private void MoveBall_Click(object sender, RoutedEventArgs e)
+        {
+
+            _timer.Start();
+        }
+        private void StopBall_Click(object sender, RoutedEventArgs e)
+        {
+            _timer.Stop();
+        }
+        private void DeleteBall_Click(object sender, RoutedEventArgs e)
+        {
+            int ilosc = int.Parse(IloscKulek.Text);
+            for (int i = 0; i < ilosc; i++)
+            {
+                _logic.GetBalls().RemoveAt(i);
+                Redraw();
+            }
+        }
         private void Redraw()
         {
             BilliardTable.Children.Clear();
@@ -41,7 +80,7 @@ namespace Presentation
                 {
                     Width = ball.Radius * 2,
                     Height = ball.Radius * 2,
-                    Fill = Brushes.White
+                    Fill = Brushes.White,
                 };
                 Canvas.SetLeft(ellipse, ball.X);
                 Canvas.SetTop(ellipse, ball.Y);

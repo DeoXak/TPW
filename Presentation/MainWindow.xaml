@@ -5,9 +5,17 @@
         xmlns:mc="http://schemas.openxmlformats.org/markup-compatibility/2006"
         xmlns:local="clr-namespace:Presentation"
         mc:Ignorable="d"
-        Title="MainWindow" Height="450" Width="800">
-    <Grid>
-        <Canvas Name="BilliardTable" Background="#2C5F34" Height="200" Width="400"/>
-        <Button Content="Dodaj kulkę" Click="AddBall_Click" VerticalAlignment="Bottom" Width="150" Margin="0,0,0,20" />
-    </Grid>
+        Title="MainWindow" Height="350" Width="600">
+    <DockPanel>
+        <StackPanel DockPanel.Dock="Top" Orientation="Horizontal" Background="#F0F0F0">
+            <Button Content="Dodaj Kulę" Click="AddBall_Click" Margin="0,0,10,0"/>
+            <Button Content="Zacznij Ruch" Click="MoveBall_Click" Margin="0,0,10,0"/>
+            <Button Content="Zatrzymaj Ruch" Click="StopBall_Click" Margin="0,0,10,0"/>
+            <Button Content="Usuń kule" Click="DeleteBall_Click" Margin="0,0,10,0"/>
+            <TextBox x:Name = "IloscKulek" Width="50"/>
+        </StackPanel>
+        <Border BorderBrush="#5D4037" BorderThickness="10" Height="270" Width="520">
+            <Canvas x:Name="BilliardTable" Background="#2C5F34" Height="250" Width="500"/>
+        </Border>
+    </DockPanel>
 </Window>

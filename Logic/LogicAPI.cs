@@ -4,8 +4,8 @@ namespace Logic
     public abstract class LogicAPI
     {
         public abstract List<Ball> GetBalls();
-        public abstract bool AddBall(double x, double y, double radius);
-
+        public abstract bool AddBall(double x, double y, double radius, double velx, double vely);
+        public abstract void UpdatePosition(double height, double width);
         public static LogicAPI CreateLayer()
         {
             return new BallRepository();
@@ -18,7 +18,7 @@ namespace Logic
 
         public override List<Ball> GetBalls() => _balls;
 
-        public override bool AddBall(double x, double y, double radius)
+        public override bool AddBall(double x, double y, double radius, double velx, double vely)
         {
             foreach (var b in _balls)
             {
@@ -30,8 +30,37 @@ namespace Logic
                 }
             }
 
-            _balls.Add(new Ball(x, y, radius));
+            _balls.Add(new Ball(x, y, radius, velx, vely));
             return true;
+        }
+        public override void UpdatePosition(double height, double width)
+        {
+            foreach (var b in _balls)
+            {
+                if (b.X <= 0)
+                {
+                    b.VelX = -b.VelX;
+                    b.X = 0;
+                }
+                else if (b.X >= width - b.Radius * 2)
+                {
+                    b.VelX = -b.VelX;
+                    b.X = width - b.Radius * 2;
+                }
+                else if (b.Y <= 0)
+                {
+                    b.VelY = -b.VelY;
+                    b.Y = 0;
+                }
+                else if (b.Y >= height - b.Radius * 2)
+                {
+                    b.VelY = -b.VelY;
+                    b.Y = height - b.Radius * 2;
+                }
+                b.X += b.VelX;
+                b.Y += b.VelY;
+            }
+
         }
     }
 }
