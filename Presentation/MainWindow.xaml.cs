@@ -56,42 +56,6 @@ namespace Presentation
             _logic.Clear();
             Redraw();
         }
-
-        private void AddBall_Click(object sender, RoutedEventArgs e)
-        {
-            int ilosc = int.Parse(IloscKulek.Text);
-            for (int i = 0; i < ilosc; i++)
-            {
-                double radius = 10;
-
-                double x = _random.NextDouble() * (BilliardTable.ActualWidth - 2 * radius);
-                double y = _random.NextDouble() * (BilliardTable.ActualHeight - 2 * radius);
-                double velx = _random.NextDouble() * 10 - 5;
-                double vely = _random.NextDouble() * 10 - 5;
-
-                _logic.AddBall(x, y, radius, velx, vely);
-
-                Redraw();
-            }
-        }
-        private void MoveBall_Click(object sender, RoutedEventArgs e)
-        {
-
-            _timer.Start();
-        }
-        private void StopBall_Click(object sender, RoutedEventArgs e)
-        {
-            _timer.Stop();
-        }
-        private void DeleteBall_Click(object sender, RoutedEventArgs e)
-        {
-            int ilosc = int.Parse(IloscKulek.Text);
-            for (int i = 0; i < ilosc; i++)
-            {
-                _logic.GetBalls().RemoveAt(i);
-                Redraw();
-            }
-        }
         private void Redraw()
         {
             BilliardTable.Children.Clear();

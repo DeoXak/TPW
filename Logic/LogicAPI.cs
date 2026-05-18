@@ -161,34 +161,5 @@ namespace Logic
                 }
             }
         }
-        public override void UpdatePosition(double height, double width)
-        {
-            foreach (var b in _balls)
-            {
-                if (b.X <= 0)
-                {
-                    b.VelX = -b.VelX;
-                    b.X = 0;
-                }
-                else if (b.X >= width - b.Radius * 2)
-                {
-                    b.VelX = -b.VelX;
-                    b.X = width - b.Radius * 2;
-                }
-                else if (b.Y <= 0)
-                {
-                    b.VelY = -b.VelY;
-                    b.Y = 0;
-                }
-                else if (b.Y >= height - b.Radius * 2)
-                {
-                    b.VelY = -b.VelY;
-                    b.Y = height - b.Radius * 2;
-                }
-                b.X += b.VelX;
-                b.Y += b.VelY;
-            }
-
-        }
     }
 }
