@@ -14,6 +14,9 @@ using System.Security.RightsManagement;
 
 namespace Presentation
 {
+    /// <summary>
+    /// Interaction logic for MainWindow.xaml
+    /// </summary>
     public partial class MainWindow : Window
     {
         private LogicAPI _logic = LogicAPI.CreateLayer();
